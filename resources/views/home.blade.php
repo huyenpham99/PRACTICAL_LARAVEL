@@ -50,7 +50,7 @@
 <body>
 <div class="card">
     <div class="card-body table-responsive p-0">
-        <form class="example" action="/action_page.php" style="margin:auto;max-width:200px;  margin-left: 1150px">
+        <form class="example" action="{{url("/search")}}" style="margin:auto;max-width:200px;  margin-left: 1150px">
             <input type="text" placeholder="Search.." name="search2">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
@@ -66,9 +66,6 @@
                 <th>Author ID</th>
                 <th>Create At</th>
                 <th>Update At</th>
-                <th>Add Book</th>
-                <th>Edit</th>
-                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -82,19 +79,6 @@
                     <td>{{$book->__get("authorid")}}</td>
                     <td>{{$book->__get("created_at")}}</td>
                     <td>{{$book->__get("updated_at")}}</td>
-                   <td> <a href="{{url("admin/new-book")}}" class="float-right btn btn-outline-primary">Add Book</a></td>
-
-                    <td>
-                        <a href="{{url("/edit-book/{$book->__get("id")}")}}" class="btn btn-outline-warning">Edit</a>
-
-                    </td>
-                    <td> <form action="{{url("/delete-book/{$book->__get("id")}")}}" method="post">
-                            @method("DELETE")
-                            @csrf
-                            <button type="submit" onclick="return confirm('Are you sure')"; class="btn btn-danger">Delete</button>
-                        </form></td>
-                </tr>
-
             @endforeach
             </tbody>
         </table>

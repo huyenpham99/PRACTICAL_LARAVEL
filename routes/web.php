@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WebController@home');
 
+Route::get('/search', 'WebController@search');

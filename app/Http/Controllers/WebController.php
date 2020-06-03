@@ -14,9 +14,11 @@ class WebController extends Controller
             "books" => $books,
         ]);
     }
-    public function newBrand()
-    {
-        return view("new");
-    }
+ public function search(Request $request){
+     $book1 = Book::where("title", $request->search2)->get();
+     return view("search", [
+         "book1"=>$book1,
+     ]);
+ }
 
 }
