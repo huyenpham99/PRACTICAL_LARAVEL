@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
-    public function home(Request $request)
+    public function home()
     {
         $books = Book::all();
         return view("home", [
-            "books" => $books
+            "books" => $books,
         ]);
     }
-
+    public function newBrand()
+    {
+        return view("new");
+    }
 
 }

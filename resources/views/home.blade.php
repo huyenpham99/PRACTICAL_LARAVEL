@@ -6,25 +6,55 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Practical - Library</title>
+    <style>* {
+            box-sizing: border-box;
+        }
+
+        /* Style the search field */
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        /* Style the submit button */
+        form.example button {
+            float: left;
+            width: 20%;
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none; /* Prevent double borders */
+            cursor: pointer;
+        }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+
+        /* Clear floats */
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }</style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Load icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="card">
-{{--    <div class="card-header">--}}
-{{--        <h3 class="card-title">Book</h3>--}}
-{{--        <a href="{{url("new-book")}}" class="btn btn-outline-success ml-3">+</a>--}}
-{{--        <div class="card-tools">--}}
-{{--            <div class="input-group input-group-sm" style="width: 150px;">--}}
-{{--                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">--}}
-
-{{--                <div class="input-group-append">--}}
-{{--                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-    <!-- /.card-header -->
     <div class="card-body table-responsive p-0">
+        <form class="example" action="/action_page.php" style="margin:auto;max-width:200px;  margin-left: 1150px">
+            <input type="text" placeholder="Search.." name="search2">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+
         <table class="table table-hover text-nowrap">
             <thead>
             <tr>
@@ -36,6 +66,9 @@
                 <th>Author ID</th>
                 <th>Create At</th>
                 <th>Update At</th>
+                <th>Add Book</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -43,18 +76,29 @@
                 <tr>
                     <td>{{$book->__get("id")}}</td>
                     <td>{{$book->__get("title")}}</td>
-                    <td>{{$book->__get("IDBN")}}</td>
+                    <td>{{$book->__get("ISBN")}}</td>
                     <td>{{$book->__get("pub_year")}}</td>
                     <td>{{$book->__get("available")}}</td>
                     <td>{{$book->__get("authorid")}}</td>
                     <td>{{$book->__get("created_at")}}</td>
                     <td>{{$book->__get("updated_at")}}</td>
+                   <td> <a href="{{url("admin/new-book")}}" class="float-right btn btn-outline-primary">Add Book</a></td>
+
+                    <td>
+                        <a href="{{url("/edit-book/{$book->__get("id")}")}}" class="btn btn-outline-warning">Edit</a>
+
+                    </td>
+                    <td> <form action="{{url("/delete-book/{$book->__get("id")}")}}" method="post">
+                            @method("DELETE")
+                            @csrf
+                            <button type="submit" onclick="return confirm('Are you sure')"; class="btn btn-danger">Delete</button>
+                        </form></td>
                 </tr>
+
             @endforeach
             </tbody>
         </table>
     </div>
-    <!-- /.card-body -->
 </div>
 </body>
 </html>

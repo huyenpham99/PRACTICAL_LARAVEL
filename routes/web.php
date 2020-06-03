@@ -13,9 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/home', 'WebController@home');
-Route::get('/new-book', 'WebController@newBook');
-Route::post('/save-book', 'WebController@saveBook');
+Route::get('/', 'WebController@home');
+

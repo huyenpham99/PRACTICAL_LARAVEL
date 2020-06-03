@@ -14,11 +14,4 @@ class Book extends Model
         "available",
         "authorid",
     ];
-    public function get($key)
-    {
-        if (is_null($this->get($key)))
-            return "default value";
-        return $this->get($key);
-    }
-
 }
